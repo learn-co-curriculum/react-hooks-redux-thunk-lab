@@ -22,5 +22,5 @@ ReactDOM.render(
   <Provider store={store}>
     <WrapperApp />
   </Provider>,
-  document.getElementById('container')
+  document.getElementById('root')
 );
