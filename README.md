@@ -37,7 +37,7 @@ Save the results of this `fetch` request to a `const`, `cats`, and make sure you
 
 ### Part 2: Build the Container Component
 
-Your `App` component should use `connect` and `mapStateToProps` to set a prob of `catPics` to the cats collection in state.
+Your `App` component should use `connect` and `mapStateToProps` to set a prop of `catPics` to the cats collection in state.
 
 #### Dispatching the `fetchCats` action
 
