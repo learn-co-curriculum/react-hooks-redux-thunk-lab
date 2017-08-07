@@ -19,7 +19,7 @@ Our action creator function will be making a request to `http://localhost:3000/d
 
 First things first, use Redux's `createStore` function to initialize your store in `src/index.js`. Define your `rootReducer` in `reducers/index.js` to use the `combineReducers` function with your `catsReducer`.
 
-Once your initialize your store with the reducer and middleware, make sure you pass it to the `<Provider>` component and wrap your `<App>` component in the `<Provider>` in `src/index.js`.
+Once you initialize your store with the reducer and middleware, make sure you pass it to the `<Provider>` component and wrap your `<App>` component in the `<Provider>` in `src/index.js`.
 
 Define your `catsReducer` in `src/reducers/cats_reducer`. Your `catsReducer` should respond to one action, an action with a type of `'FETCH_CATS'`.
 
