@@ -14,7 +14,7 @@ describe('async actions', () => {
   })
 
   it('uses redux-promise to create an action object with type of "FETCH_CATS" and a payload of cat images when fetchCats is dispatched', () => {
-    nock('http://localhost:3000')
+    nock('http://localhost:4000')
       .get('/db')
       .reply(200, { images: [{url: "www.example.com/cat1"}, {url: 'www.example.com/cat2'}] })
 
