@@ -11,9 +11,9 @@ Who doesn't want to look at pictures of cats? Well, now you can look at up to 20
 
 We'll build out our app following the **container pattern**. We'll have one top-level component, `App`, that connects to the store and gets data from the state via `mapStateToProps`. `App` will render a child presentational component, `CatList`, which will recieve the list of cat pics from `App` and render them in a series of `<img>` tags.
 
-We'll be getting our cat pics from a real API! Sort of. We made a very special API just for you to use with this lab (aren't you so lucky). Clone down [this repo](https://github.com/learn-co-curriculum/cat-api), run `npm install` and `npm start`. If you point your browser to `http://localhost:3000/db` you should see a JSON collection of 20 cat image objects.
+We'll be getting our cat pics from a real API! Sort of. We made a very special API just for you to use with this lab (aren't you so lucky). Clone down [this repo](https://github.com/learn-co-curriculum/cat-api), run `npm install` and `npm start`. If you point your browser to `http://localhost:4000/db` you should see a JSON collection of 20 cat image objects.
 
-Our action creator function will be making a request to `http://localhost:3000/db` to receive these cat images.
+Our action creator function will be making a request to `http://localhost:4000/db` to receive these cat images.
 
 ### Part 1: Set Up the Store and Reducer and Action Creator
 
@@ -26,7 +26,7 @@ Define your `catsReducer` in `src/reducers/cats_reducer`. Your `catsReducer` sho
 Define your action creator function, `fetchCats` in `src/actions/catActions`. This action should use `fetch` to make the web request for your cat pic JSON. It should use a `then` function to parse the JSON of the response to this request, and another `.then` function chained on that to grab the actual collection of cat pic image objects. Something like:
 
 ```js
-fetch('http://localhost:3000/db').then(response => {
+fetch('http://localhost:4000/db').then(response => {
   return response.json()
 }).then(responseJSON => {
   return responseJSON.images
