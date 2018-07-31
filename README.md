@@ -14,7 +14,7 @@ it yourself! Let's get started.
 We'll build out our app following the **container pattern**. We'll have one
 top-level component, `App`, that connects to the store and gets data from the
 state via `mapStateToProps`. `App` will render a child presentational component,
-`CatList`, which will recieve the list of cat pics from `App` and render them in
+`CatList`, which will receive the list of cat pics from `App` and render them in
 a series of `<img>` tags.
 
 We'll be getting our cat pics from a real API! Sort of. We made a very special
