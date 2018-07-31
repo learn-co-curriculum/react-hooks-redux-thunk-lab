@@ -3,7 +3,6 @@ import thunk from 'redux-thunk'
 import * as actions from '../src/actions/catActions'
 import expect, { createSpy, spyOn, isSpy } from 'expect'
 import nock from 'nock'
-import expect from 'expect'
 
 // change to redux thunk
 const middlewares = [ thunk ]
