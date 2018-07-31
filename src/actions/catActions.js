@@ -9,6 +9,5 @@ export function fetchCats() {
       }).then(responseJson => {
         dispatch({type: 'FETCH_CATS', payload: responseJson.images})
     })
-    // return cats;
   }
 }
