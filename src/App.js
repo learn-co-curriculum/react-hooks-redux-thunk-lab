@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { Navbar } from 'react-bootstrap'
 import CatList from './CatList'
 import { connect } from 'react-redux'
@@ -32,6 +33,9 @@ function mapStateToProps(state) {
   return {catPics: state.cats.pictures}
 }
 
+function mapDispatchToProps(dispatch) {
+  return {actions: bindActionCreators(actions, dispatch)}
+}
 
 
 export const WrapperApp = connect( mapStateToProps, {...actions} )(App)

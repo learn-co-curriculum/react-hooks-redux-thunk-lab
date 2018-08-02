@@ -4,6 +4,7 @@ Who doesn't want to look at pictures of cats? Well, now you can look at up to 20
 pictures of cats with our new React + Redux app. All you have to do is...build
 it yourself! Let's get started.
 
+
 ## Objectives
 
 1. Use Redux-Thunk middleware to make an asynchronous web request in an action creator function
