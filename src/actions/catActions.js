@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch';
 export function fetchCats() {
 
   return function(dispatch){

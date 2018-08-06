@@ -38,7 +38,7 @@ pass it to the `<Provider>` component and wrap your `<App>` component in the
 `<Provider>` in `src/index.js`.
 
 Define your `catsReducer` in `src/reducers/cats_reducer`. Your `catsReducer`
-should respond to one action, an action with a type of `'FETCH_CATS'`.
+should respond to two actions with types of  `'LOADING_CATS'` and a `'FETCH_CATS'` respectively.
 
 Define your action creator function, `fetchCats` in `src/actions/catActions`.
 This action should use `fetch` to make the web request for your cat pic JSON. It
