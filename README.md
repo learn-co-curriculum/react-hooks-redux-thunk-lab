@@ -4,6 +4,7 @@ Who doesn't want to look at pictures of cats? Well, now you can look at up to 20
 pictures of cats with our new React + Redux app. All you have to do is...build
 it yourself! Let's get started.
 
+
 ## Objectives
 
 1. Use Redux-Thunk middleware to make an asynchronous web request in an action creator function
@@ -37,7 +38,7 @@ pass it to the `<Provider>` component and wrap your `<App>` component in the
 `<Provider>` in `src/index.js`.
 
 Define your `catsReducer` in `src/reducers/cats_reducer`. Your `catsReducer`
-should respond to one action, an action with a type of `'FETCH_CATS'`.
+should respond to two actions with types of  `'LOADING_CATS'` and a `'FETCH_CATS'` respectively.
 
 Define your action creator function, `fetchCats` in `src/actions/catActions`.
 This action should use `fetch` to make the web request for your cat pic JSON. It
