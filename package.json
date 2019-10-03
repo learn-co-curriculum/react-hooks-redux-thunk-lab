@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "babel-core": "^6.22.1",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-airbnb": "^2.1.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
@@ -30,6 +31,7 @@
     "fetch-mock": "^6.5.2",
     "mocha-multi": "^1.0.1",
     "nock": "^9.0.9",
+    "node-fetch": "^2.6.0",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",

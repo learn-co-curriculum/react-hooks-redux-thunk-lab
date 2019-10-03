@@ -1,20 +1,20 @@
-import catsReducer from '../src/reducers/cats_reducer'
-import expect from 'expect'
+import catsReducer from '../src/reducers/catsReducer'
+import {expect} from 'chai'
 
 describe('cats reducer', () => {
   it('should return the initial state', () => {
     expect(
       catsReducer(undefined, {})
-    ).toEqual({loading: false, pictures: []})
+    ).to.eql({loading: false, cats: []})
   })
 
-  it('should handle the FETCH_CATS action', () => {
+  it('should handle the ADD_CATS action', () => {
     const catPics = [{url: "www.example.com/cat1"}, {url: 'www.example.com/cat2'}]
     expect(
       catsReducer([], {
-        type: 'FETCH_CATS',
-        payload:  catPics
+        type: 'ADD_CATS',
+        cats:  catPics
       })
-    ).toEqual({loading: false, pictures: catPics})
+    ).to.eql({loading: false, cats: catPics})
   })
 })
