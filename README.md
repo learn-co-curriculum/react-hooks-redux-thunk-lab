@@ -127,10 +127,11 @@ expecting a payload object with a `cats` key).
 
 #### Setting up the Action Creator
 
-Now, define your action creator function, `fetchCats()` in `src/actions/catActions`. This part, **we leave up to you to figure out** - remember,
-Thunk alters the behavior of action creator functions, allowing us to
-_return_ a function that takes in `dispatch`. Inside this function,
-we can execute asynchronous code, and, once resolved, we can use `dispatch` to update our store with remote data.
+Now, define your action creator function, `fetchCats()` in
+`src/actions/catActions`. Remember, Thunk alters the behavior of action creator
+functions, allowing us to _return_ a function that takes in `dispatch`. Inside
+this function, we can execute asynchronous code, and, once resolved, we can use
+`dispatch` to update our store with the remote data.
 
 The `fetchCats()` action creator should use `fetch()` to make the web request for
 your cat pic JSON. It should use a `.then()` function to parse the JSON of the
@@ -171,8 +172,44 @@ We can see that the reducer is expecting an action that looks like this:
 }
 ```
 
-Refer to the previous lesson for a more detailed example of how an 
-action creator function looks with Thunk.
+Putting what we know together, we can start by writing the basic function defintion:
+
+```js
+export const fetchCats = () => {
+  return (dispatch) => {
+
+  }
+}
+```
+
+The first thing we want to do in this function is send a `dispatch` to indicate
+we're loading (fetching) the cats:
+
+```js
+export const fetchCats = () => {
+  return (dispatch) => {
+    dispatch({ type: 'LOADING' })
+  }
+}
+```
+
+Then, we call `fetch()`, dispatching the returned data:
+
+```js
+export const fetchCats = () => {
+  return (dispatch) => {
+    dispatch({ type: 'LOADING_CATS'})
+    fetch('https://learn-co-curriculum.github.io/cat-api/cats.json').then(response => {
+      return response.json()
+    }).then(responseJSON => {
+      dispatch({ type: 'ADD_CATS', cats: responseJSON.images })
+    })
+  }
+}
+```
+
+In this case, we just need the data inside `images`, so we can pass that
+directly when calling the second `dispatch`.
 
 ### Part 2: Build the Container Component
 
@@ -253,7 +290,7 @@ class App extends Component {
   }
   
   render() {
-    console.log(this.props.loading)
+    console.log(this.props.catPics) // log will fire every time App renders
     return (
       <div className="App">
         <h1>CatBook</h1>
@@ -279,9 +316,9 @@ to `[]` on the first two renders, but on the third, we see an array of
 
 > **Aside**: Why is `this.props.catPics` set to `[]` on the first two renders?
 The first render is the initial render, which is always expected. The _second_
-render, however, occurs when send our _first_ dispatch, `dispatch({type:
-'LOADING_CATS'})`. If we logged `this.props.loading` instead of `catPics`, we
-would see the following logged:
+render, however, occurs when send our _first_ dispatch,
+`dispatch({type: 'LOADING_CATS'})`. If we logged `this.props.loading` instead of
+`catPics`, we would see the following logged:
 
 ```js
 false
@@ -295,12 +332,12 @@ component.
 
 #### The Presentational Component
 
-Your container component, `App`, should render the presentational component,
-`CatList`. `App` should pass `catPics` down to `CatList` as a prop. `CatList`
-should iterate over the cat pics and display each cat pic in an image URL.
-Remember to use `debugger` to take a look at the `catPics` collection and
-determine which property of each `catPic` object you will use to populate your
-`<img>` tag and render the image.
+We will leave the final task to you - buidling the `CatList` component. Your
+container component, `App`, should render the`CatList` component. `App` will
+pass `catPics` down to `CatList` as a prop. `CatList` should iterate over the
+cat pics and display each cat pic in an image URL. Remember to use `debugger` to
+take a look at the `catPics` collection and determine which property of each
+`catPic` object you will use to populate your `<img>` tag and render the image.
 
 ## Conclusion
 
@@ -310,5 +347,20 @@ regular React app. The other connects to Redux, but beyond that, is not any
 different than a regular React + Redux app. Thunk lets us augment our action
 creators and handle our asynchronous requests without requiring any major
 changes to other parts of the applcation.
+
+## Bonus
+
+While we have a working application, there is one more thing we did not fully
+implement: handling loading. If you've followed the instructions, you should
+have access to `this.props.loading` in your `App` component. If we log this
+value, we should see that it starts off `false`, then becomes `true` briefly
+before switching back to `false` again.
+
+While content is being fetched, it would be nice to show the user something -
+often, spinning icons are used, but even just a simple 'Loading...' is enough
+to show to the user that content is on the way.
+
+How might we use the value of `this.props.loading` to implement a loading
+message until the cat images arrive?
 
 [Static JSON]: https://learn-co-curriculum.github.io/cat-api/cats.json
