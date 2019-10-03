@@ -272,10 +272,10 @@ component is mounting for the first time*. This is the perfect place to go and
 get the cat pics.
 
 We need to define our `componentDidMount()` function so that it calls our
-`fetchCats()` action creator. Rather than write out the full
-`mapDispatchToProps()` function to make `fetchCats()` available, we'll go with the shorthand approach, passing `fetchCats` inside an object as
-the second argument to `connect`. We can then access the function as `this.props.fetchCats()` inside the component and call this when
-the component mounts:
+`fetchCats()` action creator. We also need to write out a `mapDispatchToProps()`
+function to make `fetchCats()` available. We can then access the function as
+`this.props.fetchCats()` inside the component and call this when the component
+mounts:
 
 ```js
 // src/App.js
@@ -286,6 +286,7 @@ import { fetchCats } from './actions/catActions'
 class App extends Component {
   
   componentDidMount() {
+    console.log(this.props)
     this.props.fetchCats()
   }
   
@@ -307,12 +308,18 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { fetchCats })(App)
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchCats: () => dispatch(fetchCats())
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 ```
 
-Ah! If we check the console, we'll see that `this.props.catPics` is set
-to `[]` on the first two renders, but on the third, we see an array of
-20 cat objects!
+Ah! If we check the console, we'll see that `this.props.catPics` is set to `[]`
+on the first two renders, but on the third, we see an array of 20 cat objects!
+Notice that we still can call `dispatch` here, even though we're also calling
+`dispatch` in our action creator.
 
 > **Aside**: Why is `this.props.catPics` set to `[]` on the first two renders?
 The first render is the initial render, which is always expected. The _second_
