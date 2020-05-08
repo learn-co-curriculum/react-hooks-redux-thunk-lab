@@ -46,7 +46,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha test/helpers/browser.js test/*.js",
+    "test": "mocha --timeout 5000 test/helpers/browser.js test/*.js",
     "eject": "react-scripts eject"
   }
 }
