@@ -370,4 +370,5 @@ to show to the user that content is on the way.
 How might we use the value of `this.props.loading` to implement a loading
 message until the cat images arrive?
 
+
 [Static JSON]: https://learn-co-curriculum.github.io/cat-api/cats.json
