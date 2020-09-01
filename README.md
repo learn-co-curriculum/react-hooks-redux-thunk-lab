@@ -147,7 +147,7 @@ fetch('https://learn-co-curriculum.github.io/cat-api/cats.json').then(response =
 })
 ```
 
-Remember, we built the `catsReducer` to look for two action types. The first, `'LOADING_CATS'`, should be dispatched _before_ to the `fetch()`
+Remember, we built the `catsReducer` to look for two action types. The first, `'LOADING_CATS'`, should be dispatched _before_ the `fetch()`
 request is called. The other type, `'ADD_CATS'`, should be dispatched
 along with a payload of the cats JSON collection. Judging by the case
 for `'ADD_CATS'`:
@@ -172,7 +172,7 @@ We can see that the reducer is expecting an action that looks like this:
 }
 ```
 
-Putting what we know together, we can start by writing the basic function defintion:
+Putting what we know together, we can start by writing the basic function definition:
 
 ```js
 export const fetchCats = () => {
@@ -188,7 +188,7 @@ we're loading (fetching) the cats:
 ```js
 export const fetchCats = () => {
   return (dispatch) => {
-    dispatch({ type: 'LOADING' })
+    dispatch({ type: 'LOADING_CATS' })
   }
 }
 ```
@@ -216,7 +216,7 @@ directly when calling the second `dispatch`.
 Now that Redux and Thunk are set up, it is time to display the retrieved data in
 our app. First, let's set up the `App` component to read from our Redux store.
 We'll do this by first importing `connect` from `react-redux`, wrapping the
-funtion around `App` on the export line. Then, we'll write a `mapStateToProps()`
+function around `App` on the export line. Then, we'll write a `mapStateToProps()`
 helper function. This function will be passed into `connect`. `connect` calls
 this function, passing in the state from the Redux store. Any key/value pairs
 returned by `mapStateToProps()` will become props in the `App` component. We can
@@ -322,10 +322,10 @@ Notice that we still can call `dispatch` here, even though we're also calling
 `dispatch` in our action creator.
 
 > **Aside**: Why is `this.props.catPics` set to `[]` on the first two renders?
-The first render is the initial render, which is always expected. The _second_
-render, however, occurs when send our _first_ dispatch,
+The first render is the initial render, so an empty `catPics` array is always expected. The _second_
+render, however, occurs when we send our _first_ dispatch,
 `dispatch({type: 'LOADING_CATS'})`. If we logged `this.props.loading` instead of
-`catPics`, we would see the following logged:
+`catPics`, we would see the following:
 
 ```js
 false
@@ -339,7 +339,7 @@ component.
 
 #### The Presentational Component
 
-We will leave the final task to you - buidling the `CatList` component. Your
+We will leave the final task to you - building the `CatList` component. Your
 container component, `App`, should render the`CatList` component. `App` will
 pass `catPics` down to `CatList` as a prop. `CatList` should iterate over the
 cat pics and display each cat pic in an image URL. Remember to use `debugger` to
@@ -351,8 +351,8 @@ In order to get the tests to pass, you will need to wrap your `<img>` tags in a
 ## Conclusion
 
 With all tests passing, you should have a working example of a React + Redux +
-Thunk application. Of two components, one is purely presentational, just like a
-regular React app. The other connects to Redux, but beyond that, is not any
+Thunk application. Of the two components, one is purely presentational, just like a
+regular React app. The other connects to Redux, but beyond that, it's not any
 different than a regular React + Redux app. Thunk lets us augment our action
 creators and handle our asynchronous requests without requiring any major
 changes to other parts of the application.
