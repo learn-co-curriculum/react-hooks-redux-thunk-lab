@@ -1,52 +1,52 @@
 {
-  "name": "nested-routes-lab",
+  "name": "react-hooks-redux-thunk-lab",
   "version": "0.1.0",
   "private": true,
-  "babel": {
-    "presets": [
-      "airbnb",
-      "env",
-      "stage-0",
-      "react"
-    ]
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "isomorphic-fetch": "^3.0.0",
+    "nock": "^13.0.5",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "react-scripts": "4.0.1",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "jsdom": "^9.9.1",
-    "mocha": "^5.2.0",
-    "react-scripts": "^1.1.4",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^3.1.11"
-  },
-  "dependencies": {
-    "babel-core": "^6.22.1",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-airbnb": "^2.1.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.22.0",
-    "chai": "^4.1.2",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "expect": "^1.20.2",
-    "fetch-mock": "^6.5.2",
-    "mocha-multi": "^1.0.1",
-    "nock": "^9.0.9",
-    "node-fetch": "^2.6.1",
-    "react": "^16.4.1",
-    "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.4.2",
-    "react-redux": "^5.0.7",
-    "react-router": "^3.0.2",
-    "redux": "^4.0.0",
-    "redux-mock-store": "^1.2.2",
-    "redux-thunk": "^2.3.0",
-    "sinon": "^6.1.4",
-    "uuid": "^3.0.1"
+    "@ihollander/jest-learn-reporter": "^1.0.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.3.1",
+    "chai": "^4.2.0",
+    "chai-spies": "^1.0.0",
+    "enzyme": "^3.11.0",
+    "mocha": "^8.2.1",
+    "redux-mock-store": "^1.5.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha --timeout 5000 test/helpers/browser.js test/*.js",
+    "test": "echo \".results.json\" && react-scripts test --reporters=@ihollander/jest-learn-reporter --reporters=default --watchAll",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

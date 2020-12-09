@@ -1,16 +1,8 @@
-import React, { Component } from 'react';
+import React from "react";
+import Cats from "./features/cats/Cats";
 
-class App extends Component {   
-  
-  render() {
-    return (
-      <div>
-        <h1>CatBook</h1>
-        {/* add CatList component here */}
-      </div>
-    );
-  }
+function App() {
+  return <Cats />;
 }
 
-export default App
-
+export default App;
