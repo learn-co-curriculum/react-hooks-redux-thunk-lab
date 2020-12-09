@@ -52,16 +52,24 @@ describe("catsReducer()", () => {
     expect(catsReducer(undefined, {})).to.eql({ status: "idle", entities: [] });
   });
 
+  it("should handle the 'cats/catsLoading' action", () => {
+    expect(
+      catsReducer(undefined, {
+        type: "cats/catsLoading",
+      })
+    ).to.eql({ status: "loading", entities: [] });
+  });
+
   it("should handle the 'cats/catsLoaded' action", () => {
     const catPics = [
       { url: "www.example.com/cat1" },
       { url: "www.example.com/cat2" },
     ];
     expect(
-      catsReducer([], {
+      catsReducer(undefined, {
         type: "cats/catsLoaded",
         payload: catPics,
       })
-    ).to.eql({ status: "idle", cats: catPics });
+    ).to.eql({ status: "idle", entities: catPics });
   });
 });
