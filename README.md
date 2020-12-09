@@ -120,8 +120,8 @@ We have the setup for connecting Redux to the React app, and we've configured
 #### Setting up the Reducer
 
 For our `catsReducer()` function in `./src/features/cats/catsSlice.js`, we'll want
-to set up a switch that handles two action types, `'cats/loading'` and
-`'cats/loaded'`.
+to set up a switch that handles two action types, `'cats/catsLoading'` and
+`'cats/catsLoaded'`.
 
 ```js
 // ./src/features/cats/catsSlice.js
@@ -132,12 +132,12 @@ const initialState = {
 
 export default function catsReducer(state = initialState, action) {
   switch (action.type) {
-    case "cats/loading":
+    case "cats/catsLoading":
       return {
         ...state,
         status: "loading",
       };
-    case "cats/loaded":
+    case "cats/catsLoaded":
       return {
         ...state,
         entities: action.payload,
@@ -149,9 +149,9 @@ export default function catsReducer(state = initialState, action) {
 }
 ```
 
-We also set up the initial state here. We can see that in the `'cats/loading'`
+We also set up the initial state here. We can see that in the `'cats/catsLoading'`
 case, `state.status` becomes `'loading'`, while the rest of `state` is just copied
-to a new object. In the `'cats/loaded'` case, `state.status` becomes `'idle'`,
+to a new object. In the `'cats/catsLoaded'` case, `state.status` becomes `'idle'`,
 and `state.entities` is set to the `action.payload` array.
 
 #### Setting up the Action Creator
@@ -172,20 +172,20 @@ fetch("https://learn-co-curriculum.github.io/cat-api/cats.json")
   .then((response) => {
     return response.json();
   })
-  .then((responseJSON) => {
+  .then((data) => {
     // instead of logging here, call dispatch and send the cat JSON data to your store
-    console.log(responseJSON.images);
+    console.log(data.images);
   });
 ```
 
-Remember, we built the `catsReducer` to look for two action types. The first, `'cats/loading'`, should be dispatched _before_ the `fetch()`
-request is called. The other type, `'cats/loaded'`, should be dispatched
+Remember, we built the `catsReducer` to look for two action types. The first, `'cats/catsLoading'`, should be dispatched _before_ the `fetch()`
+request is called. The other type, `'cats/catsLoaded'`, should be dispatched
 along with a payload of the cats JSON collection. Judging by the case
-for `'cats/loaded'`:
+for `'cats/catsLoaded'`:
 
 ```js
 ...
-case 'cats/loaded':
+case 'cats/catsLoaded':
   return {
     ...state,
     entities: action.payload,
@@ -198,7 +198,7 @@ We can see that the reducer is expecting an action that looks like this:
 
 ```js
 {
-  type: 'cats/loaded',
+  type: 'cats/catsLoaded',
   payload: [] // cat data from the cat API
 }
 ```
@@ -217,7 +217,7 @@ we're loading (fetching) the cats:
 ```js
 export function fetchCats() {
   return function (dispatch) {
-    dispatch({ type: "cats/loading" });
+    dispatch({ type: "cats/catsLoading" });
   };
 }
 ```
@@ -227,11 +227,11 @@ Then, we call `fetch()`, dispatching the returned data:
 ```js
 export function fetchCats() {
   return function (dispatch) {
-    dispatch({ type: "cats/loading" });
+    dispatch({ type: "cats/catsLoading" });
     fetch("https://learn-co-curriculum.github.io/cat-api/cats.json")
       .then((response) => response.json())
       .then((data) => {
-        dispatch({ type: "cats/loaded", payload: data.images });
+        dispatch({ type: "cats/catsLoaded", payload: data.images });
       });
   };
 }
