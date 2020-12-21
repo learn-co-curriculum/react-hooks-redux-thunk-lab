@@ -27,9 +27,9 @@ browser to
 should see a JSON collection of 20 cat image objects. Now that we have a source
 for the data, we'll need to set up Redux and Thunk.
 
-### Part 1: Set Up the Store and Reducer and Action Creator
+## Part 1: Set Up the Store and Reducer and Action Creator
 
-#### Configuring the Store
+### Configuring the Store
 
 First things first, use Redux's `createStore()` function to initialize your
 store in `src/index.js`. To get Redux configured, we'll need to import
@@ -115,9 +115,9 @@ ReactDOM.render(
 ```
 
 We have the setup for connecting Redux to the React app, and we've configured
-`redux-think`. Now, we need to build out the reducer.
+`redux-thunk`. Now, we need to build out the reducer.
 
-#### Setting up the Reducer
+### Setting up the Reducer
 
 For our `catsReducer()` function in `./src/features/cats/catsSlice.js`, we'll want
 to set up a switch that handles two action types, `'cats/catsLoading'` and
@@ -154,7 +154,7 @@ case, `state.status` becomes `'loading'`, while the rest of `state` is just copi
 to a new object. In the `'cats/catsLoaded'` case, `state.status` becomes `'idle'`,
 and `state.entities` is set to the `action.payload` array.
 
-#### Setting up the Action Creator
+### Setting up the Action Creator
 
 Now, define your action creator function, `fetchCats()` in
 `./src/features/cats/catsSlice.js`. Remember, `redux-thunk` alters the behavior of
@@ -184,14 +184,14 @@ along with a payload of the cats JSON collection. Judging by the case
 for `'cats/catsLoaded'`:
 
 ```js
-...
+// ...
 case 'cats/catsLoaded':
   return {
     ...state,
     entities: action.payload,
     status: 'idle'
   }
-...
+// ...
 ```
 
 We can see that the reducer is expecting an action that looks like this:
@@ -240,7 +240,7 @@ export function fetchCats() {
 In this case, we just need the data inside `images`, so we can pass that
 directly when calling the second `dispatch`.
 
-### Part 2: Build the Cats Component
+## Part 2: Build the Cats Component
 
 Now that our reducer and action creators are set up, it is time to display the
 retrieved data in our app. First, let's set up the `Cats` component to read from
@@ -272,7 +272,7 @@ Using the above code, you should see an empty array logged in the console when
 the app is launched. This is the empty `entities` array in our initial state,
 now mapped to `catPics` in `Cats`.
 
-#### Dispatching the `fetchCats` Action
+### Dispatching the `fetchCats` Action
 
 This is something new, so read carefully...
 
@@ -281,7 +281,7 @@ action to get all the cat pics into state. We want our cat pics to be fetched
 when the `Cats` component is first loaded up. So, we'll enact a common pattern
 in which we use a side effect to fetch the cat pics.
 
-#### The useEffect function
+### The useEffect function
 
 When we use `useEffect()` in our component, the callback function we provide
 will _always be called automatically every time our component is rendered_. We
@@ -328,7 +328,7 @@ Once you successfully fetch cats, put them in state, grab them from state and
 pass them to `Cats` using `useSelector` prop, you're ready to build the
 `CatList` component.
 
-#### The CatList Component
+### The CatList Component
 
 We will leave the final task to you - building the `CatList` component. Your
 container component, `Cats`, should render the`CatList` component. `Cats` will
@@ -342,9 +342,9 @@ In order to get the tests to pass, you will need to wrap your `<img>` tags in a
 ## Conclusion
 
 With all tests passing, you should have a working example of a React + Redux +
-Thunk application. Of the two components, one is purely presentational, just like a
-regular React app. The other connects to Redux, but beyond that, it's not any
-different than a regular React + Redux app. Thunk lets us augment our action
+Thunk application. Of the two components, one is purely presentational, just
+like a regular React app. The other connects to Redux, but beyond that, it's not
+any different than a regular React + Redux app. Thunk lets us augment our action
 creators and handle our asynchronous requests without requiring any major
 changes to other parts of the application.
 
