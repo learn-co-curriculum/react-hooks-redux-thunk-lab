@@ -1,17 +1,11 @@
+import { waitFor } from "@testing-library/react";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { expect } from "chai";
-import nock from "nock";
-import fetch from "isomorphic-fetch";
+import fetchMock from "fetch-mock";
 import catsReducer, { fetchCats } from "../features/cats/catsSlice";
 
-// change to redux thunk
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-
-const sleep = (milliseconds) => {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
-};
 
 const catPics = [
   { url: "www.example.com/cat1" },
@@ -20,20 +14,19 @@ const catPics = [
 
 describe("async actions", () => {
   afterEach(() => {
-    nock.cleanAll();
+    fetchMock.restore();
   });
 
-  it('uses redux and thunk to create an action object with type of "cats/catsLoaded" and a payload of cat images', async () => {
-    window.fetch = fetch;
-
-    nock("https://learn-co-curriculum.github.io")
-      .get("/cat-api/cats.json")
-      .reply(200, {
-        images: [
-          { url: "www.example.com/cat1" },
-          { url: "www.example.com/cat2" },
-        ],
-      });
+  test('creates an async action object with type of "cats/catsLoaded" and a payload of cat images', async () => {
+    fetchMock.getOnce(
+      "https://learn-co-curriculum.github.io/cat-api/cats.json",
+      {
+        body: {
+          images: catPics,
+        },
+        headers: { "content-type": "application/json" },
+      }
+    );
 
     const expectedActions = [
       { type: "cats/catsLoading" },
@@ -42,34 +35,35 @@ describe("async actions", () => {
 
     const store = mockStore({});
     await store.dispatch(fetchCats());
-    await sleep(2000);
-    expect(store.getActions()).to.eql(expectedActions);
+
+    waitFor(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 });
 
 describe("catsReducer()", () => {
-  it("should return the initial state", () => {
-    expect(catsReducer(undefined, {})).to.eql({ status: "idle", entities: [] });
+  test("returns the initial state", () => {
+    expect(catsReducer(undefined, {})).toEqual({
+      status: "idle",
+      entities: [],
+    });
   });
 
-  it("should handle the 'cats/catsLoading' action", () => {
+  test("handles the 'cats/catsLoading' action", () => {
     expect(
       catsReducer(undefined, {
         type: "cats/catsLoading",
       })
-    ).to.eql({ status: "loading", entities: [] });
+    ).toEqual({ status: "loading", entities: [] });
   });
 
-  it("should handle the 'cats/catsLoaded' action", () => {
-    const catPics = [
-      { url: "www.example.com/cat1" },
-      { url: "www.example.com/cat2" },
-    ];
+  test("handles the 'cats/catsLoaded' action", () => {
     expect(
       catsReducer(undefined, {
         type: "cats/catsLoaded",
         payload: catPics,
       })
-    ).to.eql({ status: "idle", entities: catPics });
+    ).toEqual({ status: "idle", entities: catPics });
   });
 });
