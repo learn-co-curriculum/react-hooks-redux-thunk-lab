@@ -39,7 +39,7 @@ import a reducer. We haven't written it yet, but let's import from
 assigning the return value to `store`. Then, we'll wrap the `App`
 component in `Provider` and pass `store` to it:
 
-```js
+```jsx
 // ./src/index.js
 import React from "react";
 import ReactDOM from "react-dom";
@@ -66,7 +66,7 @@ need to also import `applyMiddleware` from `redux` and `thunk` from
 `applyMiddleware()`, and pass _that_ in as the second argument for
 `createStore`:
 
-```js
+```jsx
 // ./src/index.js
 import React from "react";
 import ReactDOM from "react-dom";
@@ -90,7 +90,7 @@ ReactDOM.render(
 
 We can also add the Redux DevTools:
 
-```js
+```jsx
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -248,7 +248,7 @@ our Redux store. We'll do this by first importing `useSelector` from
 `react-redux`. Then, we'll call `useSelector` in our component and write a
 callback function to access our Redux store state.
 
-```js
+```jsx
 // src/features/cats/Cats.js
 import React from "react";
 import { useSelector } from "react-redux";
@@ -293,7 +293,7 @@ We need to import `useEffect`, then define our `useEffect()` callback function
 so that it calls our `fetchCats()` action creator. We also need to import
 `useDispatch()` function to make `dispatch()` available.
 
-```js
+```jsx
 // src/features/cats/Cats.js
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
