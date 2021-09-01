@@ -1,6 +1,6 @@
 # Async Redux Lab: Pictures of Cats
 
-## Objectives
+## Learning Goals
 
 - Use `redux-thunk` middleware to make an asynchronous web request in an action
    creator function
