@@ -1,16 +1,18 @@
 # Async Redux Lab: Pictures of Cats
 
+## Objectives
+
+- Use `redux-thunk` middleware to make an asynchronous web request in an action
+   creator function
+- Dispatch an action from the `useEffect` hook
+
+## Introduction
+
 Who doesn't want to look at pictures of cats? Well, now you can look at up to 20
 pictures of cats with our new React + Redux app. All you have to do is...build
 it yourself! In this lab, you are tasked with building out a React + Redux app
 that fetches data using Thunk. Since this is a pretty specific task, we'll walk
 through it a bit in this Readme. Let's get started!
-
-## Objectives
-
-1. Use `redux-thunk` middleware to make an asynchronous web request in an action
-   creator function
-2. Dispatch an action from the `useEffect` hook.
 
 ## Instructions
 
